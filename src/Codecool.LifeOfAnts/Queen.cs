@@ -22,7 +22,7 @@ namespace Codecool.LifeOfAnts
             Random random = new Random();
             moodCooldown = random.Next(50,101);
         }
-        public override void Act()
+        public override void Act(Ant[,] area)
         {
             if (moodCooldown != 0) moodCooldown--;
             else isInMood = true;
