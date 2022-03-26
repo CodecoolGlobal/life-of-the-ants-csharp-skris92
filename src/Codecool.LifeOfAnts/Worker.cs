@@ -12,7 +12,7 @@ namespace Codecool.LifeOfAnts
         {
 
         }
-        public override void Act()
+        public override void Act(Ant[,] area)
         {
             Random random = new Random();
             Direction randomDrection = (Direction)random.Next(0, 5);
