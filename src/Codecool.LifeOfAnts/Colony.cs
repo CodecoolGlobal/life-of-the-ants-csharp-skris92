@@ -12,7 +12,8 @@ namespace Codecool.LifeOfAnts
         public Colony(int size)
         {
             area = new Ant[size, size];
-            area[size / 2, size / 2] = new Queen(size / 2, size / 2);
+            int center = Convert.ToInt32(Math.Round(Convert.ToDouble(size) / 2));
+            area[center, center] = new Queen(center, center);
         }
         public void Display()
         {
