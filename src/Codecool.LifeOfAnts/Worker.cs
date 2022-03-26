@@ -47,18 +47,5 @@ namespace Codecool.LifeOfAnts
                 return new Position(this.Position.X, this.Position.Y);
             }
         }
-        private bool IsPositionOccupied(List<Position> AntPositions, Position NextPosition)
-        {
-            bool isOccupied = false;
-            foreach (Position antPositon in AntPositions)
-            {
-                if (antPositon.X == NextPosition.X && antPositon.Y == NextPosition.Y)
-                {
-                    isOccupied = true;
-                    break;
-                }
-            }
-            return isOccupied;
-        }
     }
 }

@@ -23,6 +23,19 @@ namespace Codecool.LifeOfAnts
             }
             return positions;
         }
+        private protected bool IsPositionOccupied(List<Position> AntPositions, Position NextPosition)
+        {
+            bool isOccupied = false;
+            foreach (Position antPositon in AntPositions)
+            {
+                if (antPositon.X == NextPosition.X && antPositon.Y == NextPosition.Y)
+                {
+                    isOccupied = true;
+                    break;
+                }
+            }
+            return isOccupied;
+        }
         public override string ToString()
         {
             switch (this.GetType().Name)
