@@ -16,30 +16,30 @@ namespace Codecool.LifeOfAnts
         public override void Act(Ant[,] area)
         {
             if (actCooldown != 0) actCooldown--;
-            else
-            {
-                int width = area.GetLength(0);
-                int height = area.GetLength(1);
-                for (int i = 0; i < width; i++)
-                {
-                    for (int j = 0; j < height; j++)
-                    {
-                        if (area[i, j].GetType().Name == "Queen")
-                        {
-                            Queen queen = (Queen)area[i, j];
-                            if (queen.IsInMood)
-                            {
-                                Mate();
-                                queen.Mate();
-                            }
-                            else
-                            {
-                                KickOff(area);
-                            }
-                        }
-                    }
-                }
-            }
+            //else
+            //{
+            //    int width = area.GetLength(0);
+            //    int height = area.GetLength(1);
+            //    for (int i = 0; i < width; i++)
+            //    {
+            //        for (int j = 0; j < height; j++)
+            //        {
+            //            if (area[i, j].GetType().Name == "Queen")
+            //            {
+            //                Queen queen = (Queen)area[i, j];
+            //                if (queen.IsInMood)
+            //                {
+            //                    Mate();
+            //                    queen.Mate();
+            //                }
+            //                else
+            //                {
+            //                    KickOff(area);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
         }
         private void Mate()
         {
