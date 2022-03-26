@@ -25,7 +25,7 @@ namespace Codecool.LifeOfAnts
         public override void Act()
         {
             if (moodCooldown != 0) moodCooldown--;
-            else if (moodCooldown == 0 && isInMood == false) isInMood = true;
+            else isInMood = true;
         }
     }
 }
