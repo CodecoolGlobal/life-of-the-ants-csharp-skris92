@@ -27,9 +27,42 @@ namespace Codecool.LifeOfAnts
                 }
             }
         }
-        public void GenerateAnts(int drone, int soldier, int worker)
+        public void GenerateAnts(int drones, int soldiers, int workers)
         {
-
+            GenerateUnitsOfType(drones, "Drone");
+            GenerateUnitsOfType(soldiers, "Soldier");
+            GenerateUnitsOfType(workers, "Worker");
+        }
+        private void GenerateUnitsOfType(int numberOfUnits, string type)
+        {
+            for (int i = 0; i < numberOfUnits; i++)
+            {
+                (int, int) randomCoords = GetRandomPositionCoords();
+                switch (type)
+                {
+                    case "Drone":
+                        area[randomCoords.Item1, randomCoords.Item2] = new Drone(randomCoords.Item1, randomCoords.Item2);
+                        break;
+                    case "Soldier":
+                        area[randomCoords.Item1, randomCoords.Item2] = new Soldier(randomCoords.Item1, randomCoords.Item2);
+                        break;
+                    case "Worker":
+                        area[randomCoords.Item1, randomCoords.Item2] = new Worker(randomCoords.Item1, randomCoords.Item2);
+                        break;
+                }
+            }
+        }
+        private (int, int) GetRandomPositionCoords()
+        {
+            Random random = new Random();
+            (int, int) randomCoords;
+            do
+            {
+                randomCoords.Item1 = random.Next(area.GetLength(0));
+                randomCoords.Item2 = random.Next(area.GetLength(1));
+            }
+            while (area[randomCoords.Item1, randomCoords.Item2] != null);
+            return randomCoords;
         }
         public void Update()
         {
