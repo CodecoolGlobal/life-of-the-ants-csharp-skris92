@@ -12,7 +12,25 @@ namespace Codecool.LifeOfAnts
         /// </summary>
         public static void Main()
         {
-            Console.WriteLine("Hello, Ants!");
+            Console.WriteLine("Hello, Ants! (Enter 'q' to exit)");
+            Colony colony = new Colony(11);
+            colony.GenerateAnts(0, 5, 0);
+            colony.Display();
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "")
+                {
+                    colony.Update();
+                    Console.Clear();
+                    Console.WriteLine("Hello, Ants! (Enter 'q' to exit)");
+                    colony.Display();
+                }
+                else if (input == "q")
+                {
+                    Environment.Exit(0);
+                }
+            }
         }
     }
 }
