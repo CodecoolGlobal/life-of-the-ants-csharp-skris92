@@ -9,10 +9,15 @@ namespace Codecool.LifeOfAnts
     public class Colony
     {
         private Ant[,] area;
-        public Colony(int size)
+        public Colony(int width)
         {
-            area = new Ant[size, size];
-            int centerIndex = (size % 2 == 0) ? size / 2 - 1 : size / 2;
+            area = new Ant[width, width];
+            PutQueenOnCenter(area);
+        }
+        private void PutQueenOnCenter(Ant[,] area)
+        {
+            int width = area.GetLength(0);
+            int centerIndex = (width % 2 == 0) ? width / 2 - 1 : width / 2;
             area[centerIndex, centerIndex] = new Queen(centerIndex, centerIndex);
         }
         public void Display()
@@ -70,8 +75,21 @@ namespace Codecool.LifeOfAnts
         {
             foreach (Ant ant in area)
             {
-                ant.Act(area);
+                if (ant != null) ant.Act(area);
             }
+            UpdateArea();
+        }
+        private void UpdateArea()
+        {
+            Ant[,] newArea = new Ant[area.GetLength(0), area.GetLength(1)];
+            foreach (Ant ant in area)
+            {
+                if (ant != null)
+                {
+                    newArea[ant.Position.X, ant.Position.Y] = ant;
+                }
+            }
+            area = newArea;
         }
     }
 }
