@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Codecool.LifeOfAnts
 {
-    abstract class Ant
+    public abstract class Ant
     {
         public Position Position;
-        protected Ant(int x, int y)
+        public Ant(int x, int y)
         {
             Position = new Position(x, y);
         }
-        virtual public void Act(Ant[] area) { }
+        public abstract void Act();
     }
 }
