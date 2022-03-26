@@ -60,14 +60,5 @@ namespace Codecool.LifeOfAnts
             }
             return isOccupied;
         }
-        private List<Position> GetAntPositionsList(Ant[,] area)
-        {
-            List<Position> positions = new();
-            foreach(Ant ant in area)
-            {
-                if (ant != null) positions.Add(new Position(ant.Position.X, ant.Position.Y));
-            }
-            return positions;
-        }
     }
 }

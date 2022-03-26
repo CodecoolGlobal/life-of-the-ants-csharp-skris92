@@ -14,6 +14,15 @@ namespace Codecool.LifeOfAnts
             Position = new Position(x, y);
         }
         public virtual void Act(Ant[,] area) { }
+        private protected List<Position> GetAntPositionsList(Ant[,] area)
+        {
+            List<Position> positions = new();
+            foreach (Ant ant in area)
+            {
+                if (ant != null) positions.Add(new Position(ant.Position.X, ant.Position.Y));
+            }
+            return positions;
+        }
         public override string ToString()
         {
             switch (this.GetType().Name)
