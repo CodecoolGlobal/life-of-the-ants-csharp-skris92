@@ -9,26 +9,6 @@
                 Direction enum
             </summary>
         </member>
-        <member name="F:Codecool.LifeOfAnts.Direction.North">
-            <summary>
-                North direction
-            </summary>
-        </member>
-        <member name="F:Codecool.LifeOfAnts.Direction.East">
-            <summary>
-                East direction
-            </summary>
-        </member>
-        <member name="F:Codecool.LifeOfAnts.Direction.South">
-            <summary>
-                South direction
-            </summary>
-        </member>
-        <member name="F:Codecool.LifeOfAnts.Direction.West">
-            <summary>
-                West direction
-            </summary>
-        </member>
         <member name="T:Codecool.LifeOfAnts.Position">
             <summary>
                 Position struct
