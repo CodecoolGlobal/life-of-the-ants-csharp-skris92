@@ -52,7 +52,7 @@ namespace Codecool.LifeOfAnts
             Console.WriteLine(":(");
             Console.ReadKey();
             Random random = new Random();
-            Direction randomDirection = (Direction)random.Next(0, 5);
+            Direction randomDirection = (Direction)random.Next(0, 4);
         }
     }
 }
