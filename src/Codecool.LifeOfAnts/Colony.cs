@@ -12,11 +12,6 @@ namespace Codecool.LifeOfAnts
         public Colony(int width)
         {
             area = new Ant[width, width];
-            PutQueenOnCenter(area);
-        }
-        private void PutQueenOnCenter(Ant[,] area)
-        {
-            int width = area.GetLength(0);
             int centerIndex = (width % 2 == 0) ? width / 2 - 1 : width / 2;
             area[centerIndex, centerIndex] = new Queen(centerIndex, centerIndex);
         }
@@ -27,7 +22,7 @@ namespace Codecool.LifeOfAnts
                 for (int j = 0; j < area.GetLength(1); j++)
                 {
                     if (area[i, j] == null) Console.Write("- ");
-                    else Console.Write($"{area[i, j].ToString()} ");
+                    else Console.Write(area[i, j].ToString() + " ");
                     if (j == area.GetLength(0) - 1) Console.WriteLine();
                 }
             }
@@ -42,7 +37,7 @@ namespace Codecool.LifeOfAnts
         {
             for (int i = 0; i < numberOfUnits; i++)
             {
-                (int, int) randomCoords = GetRandomPositionCoords();
+                (int, int) randomCoords = GetValidPositionCoords();
                 switch (type)
                 {
                     case "Drone":
@@ -59,7 +54,7 @@ namespace Codecool.LifeOfAnts
                 }
             }
         }
-        private (int, int) GetRandomPositionCoords()
+        private (int, int) GetValidPositionCoords()
         {
             Random random = new Random();
             (int, int) randomCoords;
@@ -84,10 +79,7 @@ namespace Codecool.LifeOfAnts
             Ant[,] newArea = new Ant[area.GetLength(0), area.GetLength(1)];
             foreach (Ant ant in area)
             {
-                if (ant != null)
-                {
-                    newArea[ant.Position.X, ant.Position.Y] = ant;
-                }
+                if (ant != null) newArea[ant.Position.X, ant.Position.Y] = ant;
             }
             area = newArea;
         }
