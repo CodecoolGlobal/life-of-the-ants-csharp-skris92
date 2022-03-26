@@ -15,5 +15,21 @@ namespace Codecool.LifeOfAnts
         }
         public virtual void Act() { }
         public virtual void Act(Ant[,] area) { }
+        public override string ToString()
+        {
+            switch (this.GetType().Name)
+            {
+                case "Queen":
+                    return "Q";
+                case "Drone":
+                    return "D";
+                case "Soldier":
+                    return "S";
+                case "Worker":
+                    return "W";
+                default:
+                    return "Can't identify Ant!";
+            }
+        }
     }
 }
