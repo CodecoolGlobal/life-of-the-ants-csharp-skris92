@@ -12,11 +12,12 @@ namespace Codecool.LifeOfAnts
         public Soldier(int x, int y) : base (x, y)
         {
             Random random = new Random();
-            facing = (Direction)random.Next(0,5);
+            facing = (Direction)random.Next(0,4);
         }
         public override void Act(Ant[,] area)
         {
-            
+            List<Position> AntPositions = GetAntPositionsList(area);
+
         }
     }
 }
