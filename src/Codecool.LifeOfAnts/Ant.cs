@@ -13,7 +13,6 @@ namespace Codecool.LifeOfAnts
         {
             Position = new Position(x, y);
         }
-        public virtual void Act() { }
         public virtual void Act(Ant[,] area) { }
         public override string ToString()
         {
