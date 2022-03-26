@@ -49,6 +49,8 @@ namespace Codecool.LifeOfAnts
                     case "Worker":
                         area[randomCoords.Item1, randomCoords.Item2] = new Worker(randomCoords.Item1, randomCoords.Item2);
                         break;
+                    default:
+                        throw new Exception("Not valid type. Valid types: \"Drone\", \"Soldier\", \"Worker\"");
                 }
             }
         }
@@ -66,7 +68,10 @@ namespace Codecool.LifeOfAnts
         }
         public void Update()
         {
-
+            foreach (Ant ant in area)
+            {
+                ant.Act(area);
+            }
         }
     }
 }
