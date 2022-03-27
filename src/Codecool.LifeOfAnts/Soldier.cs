@@ -20,7 +20,7 @@ namespace Codecool.LifeOfAnts
             Position NextPosition = GenerateNextPosition(area);
             if (!IsPositionOccupied(AntPositions, NextPosition))
             {
-                Position = new Position(NextPosition.X, NextPosition.Y);
+                Position = NextPosition;
             }
         }
         private Position GenerateNextPosition(Ant[,] area)
