@@ -26,24 +26,24 @@ namespace Codecool.LifeOfAnts
                 List<Position> AntPositions = GetAntPositionsList(area);
                 Position QueenPosition = GetQueenPosition(area);
                 Position NextPosition = GetPositionTowardsQueen(area, QueenPosition);
+                Queen Queen = (Queen)area[QueenPosition.X, QueenPosition.Y];
+
                 if (!IsPositionOccupied(AntPositions, NextPosition))
                 {
                     this.Position = NextPosition;
-                    Queen Queen = (Queen)area[QueenPosition.X, QueenPosition.Y];
-                    if (this.Position.X == QueenPosition.X && Math.Abs(QueenPosition.Y - this.Position.Y) == 1 || 
-                        this.Position.Y == QueenPosition.Y && Math.Abs(QueenPosition.X - this.Position.X) == 1)
+                }
+                else if (area[NextPosition.X, NextPosition.Y] == Queen)
+                {
+                    if (Queen.IsInMood)
                     {
-                        if (Queen.IsInMood)
-                        {
-                            Mate();
-                            Queen.Mate();
-                        }
-                        else
-                        {
-                            Console.WriteLine(":(");
-                            Console.ReadKey();
-                            ResetPosition(area);
-                        }
+                        Mate();
+                        Queen.Mate();
+                    }
+                    else
+                    {
+                        Console.WriteLine(":(");
+                        Console.ReadKey();
+                        ResetPosition(area);
                     }
                 }
             }
