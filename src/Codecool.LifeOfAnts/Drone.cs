@@ -15,31 +15,86 @@ namespace Codecool.LifeOfAnts
         }
         public override void Act(Ant[,] area)
         {
-            if (actCooldown != 0) actCooldown--;
-            //else
-            //{
-            //    int width = area.GetLength(0);
-            //    int height = area.GetLength(1);
-            //    for (int i = 0; i < width; i++)
-            //    {
-            //        for (int j = 0; j < height; j++)
-            //        {
-            //            if (area[i, j].GetType().Name == "Queen")
-            //            {
-            //                Queen queen = (Queen)area[i, j];
-            //                if (queen.IsInMood)
-            //                {
-            //                    Mate();
-            //                    queen.Mate();
-            //                }
-            //                else
-            //                {
-            //                    KickOff(area);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            if (actCooldown > 1) actCooldown--;
+            else if (actCooldown == 1)
+            {
+                ResetPosition(area);
+                actCooldown--;
+            }
+            else
+            {
+                List<Position> AntPositions = GetAntPositionsList(area);
+                Position QueenPosition = GetQueenPosition(area);
+                Position NextPosition = GetPositionTowardsQueen(area, QueenPosition);
+                if (!IsPositionOccupied(AntPositions, NextPosition))
+                {
+                    this.Position = NextPosition;
+                    Queen Queen = (Queen)area[QueenPosition.X, QueenPosition.Y];
+                    if (this.Position.X == QueenPosition.X && Math.Abs(QueenPosition.Y - this.Position.Y) == 1 || 
+                        this.Position.Y == QueenPosition.Y && Math.Abs(QueenPosition.X - this.Position.X) == 1)
+                    {
+                        if (Queen.IsInMood)
+                        {
+                            Mate();
+                            Queen.Mate();
+                        }
+                        else
+                        {
+                            Console.WriteLine(":(");
+                            Console.ReadKey();
+                            ResetPosition(area);
+                        }
+                    }
+                }
+            }
+        }
+        private Position GetQueenPosition(Ant[,] area)
+        {
+            int queenPosition;
+            if (area.GetLength(0) % 2 == 0) queenPosition = area.GetLength(0) / 2 - 1;
+            else queenPosition = area.GetLength(0) / 2;
+            return new Position(queenPosition, queenPosition);
+        }
+        private Position GetPositionTowardsQueen(Ant[,] area, Position QueenPosition)
+        {
+            int XDistanceFromQueen = Math.Abs(QueenPosition.X - this.Position.X);
+            int YDistanceFromQueen = Math.Abs(QueenPosition.Y - this.Position.Y);
+
+            if (XDistanceFromQueen > YDistanceFromQueen)
+            {
+                if (this.Position.X < QueenPosition.X) return new Position(this.Position.X + 1, this.Position.Y);
+                else return new Position(this.Position.X - 1, this.Position.Y);
+            }
+            else if (XDistanceFromQueen < YDistanceFromQueen)
+            {
+                if (this.Position.Y < QueenPosition.Y) return new Position(this.Position.X, this.Position.Y + 1);
+                else return new Position(this.Position.X, this.Position.Y - 1);
+            }
+            else
+            {
+                Random random = new Random();
+                int randomChoice = random.Next(0, 2);
+                if (this.Position.X < QueenPosition.X && this.Position.Y < QueenPosition.Y)
+                {
+                    if (randomChoice == 0) return new Position(this.Position.X + 1, this.Position.Y);
+                    else return new Position(this.Position.X, this.Position.Y + 1);
+                }
+                else if (this.Position.X < QueenPosition.X && this.Position.Y > QueenPosition.Y)
+                {
+                    if (randomChoice == 0) return new Position(this.Position.X + 1, this.Position.Y);
+                    else return new Position(this.Position.X, this.Position.Y - 1);
+                }
+                else if (this.Position.X > QueenPosition.X && this.Position.Y > QueenPosition.Y)
+                {
+                    if (randomChoice == 0) return new Position(this.Position.X - 1, this.Position.Y);
+                    else return new Position(this.Position.X, this.Position.Y - 1);
+                }
+                else
+                {
+                    if (randomChoice == 0) return new Position(this.Position.X - 1, this.Position.Y);
+                    else return new Position(this.Position.X, this.Position.Y + 1);
+                }
+            }
         }
         private void Mate()
         {
@@ -47,12 +102,37 @@ namespace Codecool.LifeOfAnts
             Console.ReadKey();
             actCooldown = 10;
         }
-        private void KickOff(Ant[,] area)
+        private void ResetPosition(Ant[,] area)
         {
-            Console.WriteLine(":(");
-            Console.ReadKey();
             Random random = new Random();
+            List<Position> AntPositions = GetAntPositionsList(area);
+            Position NextPosition;
             Direction randomDirection = (Direction)random.Next(0, 4);
+
+            do
+            {
+                int randomCoord = random.Next(0, area.GetLength(0));
+                switch (randomDirection)
+                {
+                    case Direction.North:
+                        NextPosition = new Position(0, randomCoord);
+                        break;
+                    case Direction.West:
+                        NextPosition = new Position(randomCoord, 0);
+                        break;
+                    case Direction.South:
+                        NextPosition = new Position(area.GetLength(0) - 1, randomCoord);
+                        break;
+                    case Direction.East:
+                        NextPosition = new Position(randomCoord, area.GetLength(0) - 1);
+                        break;
+                    default:
+                        NextPosition = Position;
+                        break;
+                }
+            }
+            while (IsPositionOccupied(AntPositions, NextPosition));
+            Position = NextPosition;
         }
     }
 }
