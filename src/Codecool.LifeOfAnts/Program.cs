@@ -14,7 +14,7 @@ namespace Codecool.LifeOfAnts
         {
             Console.WriteLine("Hello, Ants! (Enter 'q' to exit)");
             Colony colony = new Colony(11);
-            colony.GenerateAnts(0, 5, 0);
+            colony.GenerateAnts(2, 3, 4);
             colony.Display();
             while (true)
             {
